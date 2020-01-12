@@ -1,6 +1,9 @@
 # Prerequisites
 *.d
 
+# Temps
+*~
+
 # Compiled Object files
 *.slo
 *.lo
@@ -30,3 +33,4 @@
 *.exe
 *.out
 *.app
+*.bin
