@@ -30,7 +30,7 @@ all: $(BINS)
 %.d: %.cpp
 
 clean:
-	-rm -f $(BINS) *.d
+	-rm -f ./bin/* *.d
 	
 -include $(DEPS)
 ifeq ($(DEBUG),yes)
@@ -62,9 +62,6 @@ all: $(BINS)
 %: %.cpp 
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) $< -o ./bin/$@.bin $(LDLIBS)
 		
-%.d: %.cpp
 
-clean:
-	-rm -f ./bin/* *.d
 	
 -include $(DEPS)
