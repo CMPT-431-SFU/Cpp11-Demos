@@ -1,6 +1,4 @@
 /*
- * CMSC 12300 - Computer Science with Applications 3
- * Borja Sotomayor, 2013
  *
  * Simple thread example: the main thread spawns another
  * thread to asynchronously perform a simple operation
@@ -12,18 +10,15 @@
  *
  */
 
-#include <thread>
+#include <chrono>
 #include <future>
 #include <iostream>
-#include <chrono>
+#include <thread>
 using namespace std;
 
-int multiply(int a, int b)
-{
-	return a*b;
-}
+int multiply(int a, int b) { return a * b; }
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
 	auto a = async(multiply, 2, 3);
 

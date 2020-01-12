@@ -1,6 +1,4 @@
 /*
- * CMSC 12300 - Computer Science with Applications 3
- * Borja Sotomayor, 2013
  *
  *
  */
@@ -37,7 +35,7 @@ void reader()
 	{
 		lock_guard<mutex> rlock(mreaders);
 		nreaders++;
-		if(nreaders==1)
+		if (nreaders == 1)
 			mvalue.lock();
 	}
 
@@ -50,15 +48,14 @@ void reader()
 	{
 		lock_guard<mutex> rlock(mreaders);
 		nreaders--;
-		if(nreaders==0)
+		if (nreaders == 0)
 			mvalue.unlock();
 	}
 }
 
-
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-	if(argc!=2)
+	if (argc != 2)
 	{
 		cerr << "Usage: " << argv[0] << " FILENAME" << endl;
 		exit(-1);
@@ -66,18 +63,18 @@ int main(int argc, char* argv[])
 
 	ifstream f(argv[1]);
 
-	while(!f.eof())
+	while (!f.eof())
 	{
 		string op;
 
 		f >> op;
-		if(op=="W")
+		if (op == "W")
 		{
 			int v;
 			f >> v;
-			rwthreads.push_back(thread(writer,v));
+			rwthreads.push_back(thread(writer, v));
 		}
-		else if (op=="R")
+		else if (op == "R")
 		{
 			rwthreads.push_back(thread(reader));
 		}
@@ -85,7 +82,7 @@ int main(int argc, char* argv[])
 	}
 
 	for (auto i = rwthreads.begin(); i != rwthreads.end(); i++)
-	   i->join();
+		i->join();
 
 	return 0;
 }

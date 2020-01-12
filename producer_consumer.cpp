@@ -1,6 +1,4 @@
 /*
- * CMSC 12300 - Computer Science with Applications 3
- * Borja Sotomayor, 2013
  *
  *
  */
@@ -25,12 +23,12 @@ unsigned int in = 0, out = 0, n = 0, v = 0;
 
 void producer()
 {
-	while(true)
+	while (true)
 	{
 
 #ifndef DISABLE_LOCKS
 		unique_lock<mutex> lock(m);
-		while(n==BUFFER_SIZE)
+		while (n == BUFFER_SIZE)
 			not_full.wait(lock);
 #endif
 
@@ -52,12 +50,12 @@ void consumer()
 {
 	int data;
 
-	while(true)
+	while (true)
 	{
 
 #ifndef DISABLE_LOCKS
 		unique_lock<mutex> lock(m);
-		while(n==0)
+		while (n == 0)
 			not_empty.wait(lock);
 #endif
 
@@ -74,7 +72,7 @@ void consumer()
 	}
 }
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
 	thread pt = thread(producer);
 	thread ct = thread(consumer);

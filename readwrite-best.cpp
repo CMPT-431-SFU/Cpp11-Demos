@@ -1,6 +1,4 @@
 /*
- * CMSC 12300 - Computer Science with Applications 3
- * Borja Sotomayor, 2013
  *
  *
  */
@@ -27,7 +25,7 @@ void writer(int v)
 {
 	unique_lock<mutex> lock(m);
 	nwriters++;
-	while(nreaders > 0)
+	while (nreaders > 0)
 		no_readers.wait(lock);
 	this_thread::sleep_for(chrono::milliseconds(1000));
 	{
@@ -36,14 +34,14 @@ void writer(int v)
 	}
 	value = v;
 	nwriters--;
-	if(nwriters==0)
+	if (nwriters == 0)
 		no_writers.notify_all();
 }
 
 void reader()
 {
 	unique_lock<mutex> lock(m);
-	while(nwriters > 0)
+	while (nwriters > 0)
 		no_writers.wait(lock);
 	nreaders++;
 	lock.unlock();
@@ -57,14 +55,13 @@ void reader()
 
 	lock.lock();
 	nreaders--;
-	if(nreaders==0)
+	if (nreaders == 0)
 		no_readers.notify_all();
 }
 
-
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-	if(argc!=2)
+	if (argc != 2)
 	{
 		cerr << "Usage: " << argv[0] << " FILENAME" << endl;
 		exit(-1);
@@ -72,18 +69,18 @@ int main(int argc, char* argv[])
 
 	ifstream f(argv[1]);
 
-	while(!f.eof())
+	while (!f.eof())
 	{
 		string op;
 
 		f >> op;
-		if(op=="W")
+		if (op == "W")
 		{
 			int v;
 			f >> v;
-			rwthreads.push_back(thread(writer,v));
+			rwthreads.push_back(thread(writer, v));
 		}
-		else if (op=="R")
+		else if (op == "R")
 		{
 			rwthreads.push_back(thread(reader));
 		}
@@ -91,7 +88,7 @@ int main(int argc, char* argv[])
 	}
 
 	for (auto i = rwthreads.begin(); i != rwthreads.end(); i++)
-	   i->join();
+		i->join();
 
 	return 0;
 }

@@ -1,6 +1,4 @@
 /*
- * CMSC 12300 - Computer Science with Applications 3
- * Borja Sotomayor, 2013
  *
  * Same as counter.cpp, but using a mutex lock to
  * access the counter.
@@ -23,7 +21,7 @@ int counter;
 void increment()
 {
 	counter_mutex.lock();
-	for(int i=0; i<ITERS; i++)
+	for (int i = 0; i < ITERS; i++)
 		counter++;
 	counter_mutex.unlock();
 }
@@ -31,24 +29,24 @@ void increment()
 void decrement()
 {
 	counter_mutex.lock();
-	for(int i=0; i<ITERS; i++)
+	for (int i = 0; i < ITERS; i++)
 		counter--;
 	counter_mutex.unlock();
 }
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-    vector<thread> vt;
+	vector<thread> vt;
 
 	cout << "The counter is " << counter << endl;
 
-	for(unsigned int i=0; i<NTHREADS; i++)
-		if(i%2==0)
-            vt.push_back(thread(increment));
+	for (unsigned int i = 0; i < NTHREADS; i++)
+		if (i % 2 == 0)
+			vt.push_back(thread(increment));
 		else
-            vt.push_back(thread(decrement));
+			vt.push_back(thread(decrement));
 
-    for(thread &t : vt)
+	for (thread &t : vt)
 		t.join();
 
 	cout << "The counter is " << counter << endl;
