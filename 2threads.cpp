@@ -1,6 +1,4 @@
 /*
- * CMSC 12300 - Computer Science with Applications 3
- * Borja Sotomayor, 2013
  *
  * Simple thread example: one thread prints 0's the
  * other prints 1's

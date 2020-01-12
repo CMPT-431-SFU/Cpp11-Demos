@@ -1,6 +1,4 @@
 /*
- * CMSC 12300 - Computer Science with Applications 3
- * Borja Sotomayor, 2013
  *
  * Same as 2threads.cpp, but using a single function
  * with parameters, as opposed to two functions.
