@@ -20,18 +20,18 @@ int counter;
 
 void increment()
 {
-	counter_mutex.lock();
+	//counter_mutex.lock();
 	for (int i = 0; i < ITERS; i++)
 		counter++;
-	counter_mutex.unlock();
+	//	counter_mutex.unlock();
 }
 
 void decrement()
 {
-	counter_mutex.lock();
+	//counter_mutex.lock();
 	for (int i = 0; i < ITERS; i++)
 		counter--;
-	counter_mutex.unlock();
+	//counter_mutex.unlock();
 }
 
 int main(int argc, char *argv[])
